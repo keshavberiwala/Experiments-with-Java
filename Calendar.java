@@ -1,4 +1,70 @@
 import java.io.*;
+import java.util.*;
+class Date
+{
+    int year;
+    int day;
+    int month[] = {31,28,31,30,31,30,31,31,30,31,30,31};
+    final String dayweek[] = {"Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"};
+    final String monthname[] = {"January","February","March","April","May","June","July","August","September","October","November","December"};
+    Date(int x, int y)
+    {
+        year = x;
+        day = y;
+
+    }
+
+    void leap()
+    {
+        if ((year%4==0 && year%100!=0) || year%400==0)
+        {
+            month[1]=29;
+        }
+    }
+
+    void calc()
+    {
+        for (int i=0;i<12;i++)
+        {
+            if (day-month[i]>0)
+            {
+                day-=month[i];
+            }
+            else 
+            {
+                System.out.print("\nDate is " + monthname[i] + " " + day + ", " + year);
+                break;
+
+            }
+        }
+    }
+
+    String printday()
+    {
+        return dayweek[(day%7)-1];
+    }
+
+    public static void main()
+    {
+        int d,y;
+        Scanner sc = new Scanner(System.in);
+        System.out.print("\nEnter year number : ");
+        y = sc.nextInt();
+        do
+        {
+            System.out.print("\nEnter day number : ");
+            d = sc.nextInt();
+        } while (d<0 || d>365); 
+        Date obj = new Date(y,d);
+        String dw = obj.printday();
+        obj.leap();
+        obj.calc();
+        System.out.print("\nThe day is " + dw);
+    }
+
+}
+
+
 class Date_Difference
 {
     static BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
@@ -84,3 +150,7 @@ class Date_Difference
             System.out.println("Invalid Date");
     }
 }
+
+
+
+
